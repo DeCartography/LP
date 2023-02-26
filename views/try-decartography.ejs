@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/help-us-improve.css">
+  <link rel="stylesheet" href="../css/try-decartography.css">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer data-deferred="1"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -15,12 +15,12 @@
 </head>
 
 <body>
-  <p class="title">Help Us Improve</p>
-  <form id="form" action="/send-form-data" method="post">
+  <p class="title">Decartography</p>
+  <form id="form" action="/send-form-data-try" method="post">
 
 
     <div class="q1">
-      <h1>Do you donate to projects that are being ran by large corporations?
+      <h1>Do you hold any NFTs?
       </h1>
       <ul class="options1">
         <input type="radio" id="yes-1" name="q1" value="1">
@@ -36,7 +36,7 @@
       </ul>
     </div>
     <div class="q2">
-      <h2>Do you donate to projects that are being ran by small entities?
+      <h2>Have you donated to any open source projects?
       </h2>
       <ul class="options2">
 
@@ -52,7 +52,7 @@
 
     </div>
     <div class="q3">
-      <h2>Do you own any NFT's that are collectibles?
+      <h2>Have you ever staked your ether?
       </h2>
       <ul class="options3">
 
@@ -69,7 +69,7 @@
       </ul>
     </div>
     <div class="q4">
-      <h2>Do you own any NFT's that are generative art?
+      <h2>Have you participated in DeFi?
       </h2>
       <ul class="options4">
 
@@ -87,21 +87,29 @@
       </ul>
     </div>
     <div class="q5">
-      <h5>Please select your cluster.</h5>
-      <div class="custom-select" style="width:200px;">
-        <select name="cluster">
-          <option value="0" selected disabled>Select Cluster</option>
-          <option value="1">Cluster 1</option>
-          <option value="2">Cluster 2</option>
-          <option value="3">Cluster 3</option>
-        </select>
-      </div>
-      <br>
-      <br>
+      <h2>Do you ever exchange ether with others?
+      </h2>
       <ul class="options5">
+
+
+        <input type="radio" id="yes-5" name="q5" value="1">
+        <label for="yes-5">Yes</label>
+
+
+
+
+        <input type="radio" id="no-5" name="q5" value="0">
+        <label for="no-5">No</label>
+
+
+      </ul>
+    </div>
+    <div class="q6">
+      <h2>Thank you for participating in Decartography's demo.
+      </h2>
+      <ul class="options6">
         <input type="submit" id="submit-button">
       </ul>
-
 
     </div>
 
@@ -115,17 +123,17 @@
     <a href="https://twitter.com/DeCartography" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
     <a href="https://decartography.github.io/docs/" target="_blank" class="github"><i class="fa fa-github"></i></a>
   </div>
-  <script src="../js/help-us-improve.js"></script>
+  <script src="../js/try-decartography.js"></script>
 
   <div class="nft">
-    <p id='loading-nft'
-      style="color:white; font-family: descriptionFont; font-size:15px; text-align: center; top: 350px;">
-      Loading...</p>
   </div>
+  <p id='loading-nft'
+    style="color:white; font-family: descriptionFont; font-size:15px; text-align: center; top: 350px;">
+    Loading NFTs...</p>
   <div class="tokens">
     <h6>ERC2O Tokens</h6>
     <p id='loading' style="color:white; font-family: descriptionFont; font-size:15px; text-align: center; top: 350px;">
-      Loading...</p>
+      Loading Tokens...</p>
   </div>
 
 

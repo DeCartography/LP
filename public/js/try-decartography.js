@@ -199,6 +199,8 @@ const q4 = document.querySelector(".q4")
 
 const q5 = document.querySelector(".q5")
 
+const q6 = document.querySelector(".q6")
+
 
 
 
@@ -224,7 +226,11 @@ ul_4.addEventListener("click", function () {
   q5.style.display = "block"
 });
 
+ul_5.addEventListener("click", function () {
 
+  q5.style.display = "none";
+  q6.style.display = "block"
+});
 
 
 var x, i, j, l, ll, selElmnt, a, b, c;
@@ -305,10 +311,10 @@ const handleAccounts = async () => {
     window.w3 = new Web3(window.ethereum)
     var accounts = await w3.eth.getAccounts()
     account = accounts[0]
-    console.log(`Help us improve, connected metamask account ${account}`)
+    console.log(`Try decartography, connected metamask account ${account}`)
     $('.q5').append(`<input class='addr' type="hidden" name="addr" value='${account}' />`)
   } else if (window.offlineAuthAddr) {
-    console.log(`Help us improve, connected offline auth account ${account}`)
+    console.log(`Try decartography, connected offline auth account ${account}`)
     $('.q5').append(`<input class='addr' type="hidden" name="addr" value='${window.offlineAuthAddr}'/>`)
   }
 }

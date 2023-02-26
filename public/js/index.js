@@ -116,9 +116,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 })
 window.onload = function () {
-  document.getElementById('enabled').addEventListener("click", function () {
+  // document.getElementById('enabled').addEventListener("click", function () {
+  //   document.querySelector('.bg-modal').style.display = "flex";
+  //   document.getElementById("caller").value = "improve"
+  // });
+
+  document.getElementById('enabled-try').addEventListener("click", function () {
     document.querySelector('.bg-modal').style.display = "flex";
+    document.getElementById("caller").value = "try"
   });
+
 
   document.querySelector('.close').addEventListener("click", function () {
     document.querySelector('.bg-modal').style.display = "none";
@@ -142,6 +149,10 @@ window.onload = function () {
     $('.modal-contents').prepend(`<h1 id="header">Log In</h1>`)
 
     document.querySelector('form').addEventListener('submit', (e) => {
+      let url = "/help-us-improve"
+      if (document.getElementById("caller").value == "try") {
+        url = "/try-decartography"
+      }
       e.preventDefault()
       const data = Object.fromEntries(new FormData(e.target).entries());
       let addr = data['addr']
@@ -174,8 +185,8 @@ window.onload = function () {
             },
             redirect: 'error'
           }
-          console.log('Help-us-improve page offline signature authorization...')
-          await fetch(`/help-us-improve`, optsAuth).then((res) => {
+          console.log('Offline signature authorization...')
+          await fetch(url, optsAuth).then((res) => {
             if (res.ok) {
               const changeBody = async () => {
                 let content = await res.text()
@@ -226,7 +237,10 @@ function toggleButton() {
     metamaskButton.onclick = function () {
       let account = null;
       let accessToken = null;
-
+      let url = "/help-us-improve"
+      if (document.getElementById("caller").value == "try") {
+        url = "/try-decartography"
+      }
       const connect = async () => {
         await window.ethereum.request({ method: "eth_requestAccounts" })
         window.w3 = new Web3(window.ethereum)
@@ -244,7 +258,7 @@ function toggleButton() {
           }
         }
 
-        let resp = await fetch(`/help-us-improve`, opts)
+        let resp = await fetch(url, opts)
         let res = await resp.text()
         setTimeout(function () {
           $('body').html(res)
