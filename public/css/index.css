@@ -133,13 +133,18 @@ canvas {
 }
 
 .twitter:hover {
-  background: #55ACEE;
+  background: grey;
   color: white;
 }
 
 .github:hover {
   background: grey;
   color: white
+}
+
+.medium:hover {
+  background: grey;
+  color: white;
 }
 
 .bg-modal {

@@ -9,7 +9,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const config = {
   // alchemy sdk api
-  apiKey: "BlF3z_DEAU83D00LRPKqnoca4OkKKLc8",
+  apiKey: "",
   network: SDK.Network.ETH_MAINNET,
 };
 const alchemy = new SDK.Alchemy(config);
@@ -62,10 +62,6 @@ app.get('/help-us-improve', authenticateToken, async (req, res) => {
   res.render('help-us-improve')
 })
 
-app.get('/try-decartography', authenticateToken, async (req, res) => {
-  res.render('try-decartography')
-})
-
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
@@ -113,70 +109,7 @@ app.post('/send-form-data', urlencodedParser, async (req, res) => {
   }
 })
 
-app.post('/send-form-data-try', urlencodedParser, async (req, res) => {
-  let addr = req.body.addr;
-  let q1Answer = req.body.q1;
-  let q2Answer = req.body.q2;
-  let q3Answer = req.body.q3;
-  let q4Answer = req.body.q4;
-  let q5Answer = req.body.q5
-  console.log(`Data sent from: ${addr}`)
-  if (q1Answer && q2Answer && q3Answer && q4Answer && q5Answer) {
-    let db = new sqlite3.Database('./db/decartography.db', sqlite3.OPEN_READWRITE, (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log('Connected to the decartography database.');
-    });
-    // sql injection?
-    db.run(`INSERT INTO try(addr, question1, question2, question3, question4,  question5)
-    VALUES (?, ?, ?, ?, ?, ?)`, [addr, q1Answer, q2Answer, q3Answer, q4Answer, q5Answer])
-
-    db.close((err) => {
-      let status = 'success'
-      if (err) {
-        console.error(err.message);
-        status = err
-      }
-      console.log('Closed the database connection.');
-      res.redirect('/')
-    });
-  } else {
-    res.sendStatus(400)
-  }
-})
-
-
-// app.get('/get-data', async (req, res) => {
-//   let db = new sqlite3.Database('./db/decartography.db', sqlite3.OPEN_READONLY, (err) => {
-//     if (err) {
-//       console.error(err.message);
-//     }
-//     console.log('Connected to the decartography database.');
-//   });
-//   // sql injection?
-//   let sql = "SELECT * FROM help_us_improve"
-//   let jsonObj = []
-//   db.all(sql, [], (err, rows) => {
-//     console.log(err)
-//     if (err) {
-//       reject(err);
-//     }
-//     jsonObj = rows
-//   });
-
-//   db.close((err) => {
-//     let status = 'success'
-//     if (err) {
-//       console.error(err.message);
-//       status = err
-//     }
-//     console.log('Closed the database connection.');
-//     res.json(jsonObj)
-//   });
-// })
-
-app.get('/get-data-try', async (req, res) => {
+app.get('/get-data', async (req, res) => {
   let db = new sqlite3.Database('./db/decartography.db', sqlite3.OPEN_READONLY, (err) => {
     if (err) {
       console.error(err.message);
@@ -184,7 +117,7 @@ app.get('/get-data-try', async (req, res) => {
     console.log('Connected to the decartography database.');
   });
   // sql injection?
-  let sql = "SELECT * FROM try"
+  let sql = "SELECT * FROM help_us_improve"
   let jsonObj = []
   db.all(sql, [], (err, rows) => {
     if (err) {
@@ -209,13 +142,9 @@ app.get('/get-nfts', async (req, res) => {
   let addr = req.query.addr
   if (addr) {
     // CHANGE HERE TO 'addr', STATIC ADDR IS JUST FOR DEVELOPMENT
-    const nfts = await alchemy.nft.getNftsForOwner('0x0626dc652585D11Eee086327159bCc3a4A8a4933');
+    const nfts = await alchemy.nft.getNftsForOwner('0x4F7f4B0CCE9FF2ABaB5EFfe220FeB1a7Dc51BADc');
     for (let nft of nfts['ownedNfts']) {
-      const response = await alchemy.nft.getNftMetadata(
-        nft.contract.address,
-        nft.tokenId
-      );
-      spesificData[nft.tokenId] = response.rawMetadata.image
+      spesificData[nft.title] = nft.media[0].raw
     }
     res.json(spesificData)
 
@@ -246,15 +175,6 @@ app.get('/get-tokens', async (req, res) => {
     res.sendStatus(400)
   }
 
-})
-
-app.get('/tx-data', async (req, res) => {
-  const data = await alchemy.core.getAssetTransfers({
-    fromBlock: "0x0",
-    fromAddress: "0x5c43B1eD97e52d009611D89b74fA829FE4ac56b1",
-    category: ["external"],
-  });
-  res.json(data)
 })
 
 app.get('/get-timestamp', async (req, res) => {
@@ -292,4 +212,4 @@ const getSignMessage = (address, nonce) => {
 }
 let port = 8080
 console.log(`http://localhost:${port}`);
-app.listen(port) 
+app.listen(port)

@@ -116,10 +116,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 })
 window.onload = function () {
-  // document.getElementById('enabled').addEventListener("click", function () {
-  //   document.querySelector('.bg-modal').style.display = "flex";
-  //   document.getElementById("caller").value = "improve"
-  // });
+  document.getElementById('enabled').addEventListener("click", function () {
+    document.querySelector('.bg-modal').style.display = "flex";
+    document.getElementById("caller").value = "improve"
+  });
 
   document.getElementById('enabled-try').addEventListener("click", function () {
     document.querySelector('.bg-modal').style.display = "flex";
