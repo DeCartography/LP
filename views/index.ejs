@@ -13,6 +13,271 @@
   <title>DeCartography</title>
   <!-- <link rel="icon" href="../public/DeCartography.png"> -->
   <link rel="icon" href="https://i.gyazo.com/16f60075e08461c087531fc610c27c95.png">
+  <style>
+    @font-face {
+  font-family: titleFont;
+  src: url(../views/CreatoDisplay-Bold.otf);
+
+
+}
+
+@font-face {
+  font-family: descriptionFont;
+  src: url(../views/CreatoDisplay-Medium.otf);
+}
+
+@keyframes shake1 {
+  0% {
+    transform: translateX(0px);
+
+  }
+
+  25% {
+    transform: translateX(-20px);
+
+  }
+
+  50% {
+    transform: translateX(0px);
+
+  }
+
+  75% {
+    transform: translateX(20px);
+
+  }
+}
+
+body {
+  margin: 0;
+  font: normal 75% Arial, Helvetica, sans-serif;
+  background-color: #000000;
+}
+
+canvas {
+  display: float;
+
+}
+
+#particles-js {
+  width: 100%;
+  height: 100%;
+  background-color: #00000000;
+}
+
+.title {
+  font-size: 85px;
+  color: white;
+  font-weight: 700;
+  font-family: titleFont;
+  text-align: left;
+  top: 35%;
+  margin-top: 0px;
+  left: 5%;
+  margin-left: 10px;
+  position: absolute;
+
+
+}
+
+.description {
+  color: #ffffff;
+  font-family: descriptionFont;
+  font-size: 18px;
+  left: 6%;
+  line-height: 22px;
+  top: 50%;
+  position: absolute;
+  text-align: justify;
+  word-wrap: break-word;
+}
+
+
+
+.disabled {
+  background-color: transparent;
+  border-style: solid;
+  border-radius: 20px;
+  width: 15%;
+  cursor: pointer;
+  font-family: titleFont;
+  font-size: 16px;
+  font-weight: 500;
+  height: 60px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: absolute;
+  text-decoration: none;
+  text-align: center;
+}
+
+
+.disabled {
+  left: 70%;
+  top: 49%;
+  border-color: rgb(114, 114, 114);
+  color: rgb(114, 114, 114);
+}
+
+.disabled:hover {
+  border-color: rgb(224, 224, 224);
+  color: rgb(224, 224, 224);
+  transition-duration: .5s;
+}
+
+#enabled {
+  left: 60%;
+}
+
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 30px;
+}
+
+.twitter:hover {
+  background: grey;
+  color: white;
+}
+
+.github:hover {
+  background: grey;
+  color: white
+}
+
+.medium:hover {
+  background: grey;
+  color: white;
+}
+
+.bg-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.modal-contents {
+  height: 300px;
+  width: 500px;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid;
+  border-color: rgb(114, 114, 114);
+  border-radius: 30px;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+
+input {
+  margin: 20px auto;
+  display: block;
+  width: 50%;
+  padding: 8px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  font-family: descriptionFont;
+  background-color: #000000;
+  color: white;
+
+}
+
+input:focus {
+  outline: 0;
+}
+
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 42px;
+  color: #333;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+  transition-duration: .5s;
+
+}
+
+#header {
+  text-align: center;
+  top: 20%;
+  color: white;
+  font-family: titleFont;
+  font-size: 30px;
+}
+
+#submit {
+  background-color: rgb(0, 0, 0);
+  border-color: rgb(4, 190, 4);
+  border-radius: 15px;
+  top: 60%;
+  color: rgb(4, 190, 4);
+  width: 25%;
+  height: 25px;
+  border: 1px solid;
+  font-family: titleFont;
+  cursor: pointer;
+  font-size: 16px
+}
+
+#submit:hover {
+  border-color: rgb(0, 265, 0);
+  color: rgb(0, 265, 0);
+  transition-duration: .5s;
+}
+
+
+
+#meta {
+  position: relative;
+  top: 10%;
+  width: 50%;
+  height: 12%;
+  border-radius: 15px;
+  border-color: rgb(114, 114, 114);
+  color: rgb(114, 114, 114);
+  background-color: #000000;
+  border: 1px solid;
+  font-family: titleFont;
+  cursor: pointer;
+}
+
+#meta:hover {
+  border-color: orange;
+  background-color: orange;
+  color: white;
+  transition-duration: .5s;
+}
+
+#img {
+  margin-right: 2px;
+}
+
+  </style>
 </head>
 
 <body>
@@ -53,5 +318,303 @@
 
 
 </body>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 40,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            },
+            "image": {
+              "src": "img/github.svg",
+              "width": 100,
+              "height": 100
+            }
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": false,
+            "anim": {
+              "enable": false,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 4,
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 80,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 180,
+            "color": "#ffffff",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "repulse"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 800,
+              "line_linked": {
+                "opacity": 1
+              }
+            },
+            "bubble": {
+              "distance": 800,
+              "size": 80,
+              "duration": 2,
+              "opacity": 0.8,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 100,
+              "duration": 0.4
+            },
+            "push": {
+              "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
+            }
+          }
+        },
+        "retina_detect": true
+      }, function () {
+        console.log('callback - particles.js config loaded');
+      });
+
+      toggleButton()
+
+    })
+    window.onload = function () {
+      document.getElementById('enabled').addEventListener("click", function () {
+        document.querySelector('.bg-modal').style.display = "flex";
+        document.getElementById("caller").value = "improve"
+      });
+
+      document.getElementById('enabled-try').addEventListener("click", function () {
+        document.querySelector('.bg-modal').style.display = "flex";
+        document.getElementById("caller").value = "try"
+      });
+
+
+      document.querySelector('.close').addEventListener("click", function () {
+        document.querySelector('.bg-modal').style.display = "none";
+      });
+
+      const getTimestamp = async () => {
+        let resp = await fetch(`/get-timestamp`)
+        return await resp.text()
+
+      }
+
+      getTimestamp().then(val => {
+        console.log(`Timestamp: ${val}`)
+        $form = $(`<form action="#" ></form>`);
+        $form.append(`<input name='addr' type="text" placeholder="Wallet Address">`)
+        $form.append(`<input name='signature' type="text" placeholder="Signature">`)
+        $form.append(`<input class='ts' type="hidden" name="ts" value=${val} />`)
+        $form.append(`<p class='ts' style="color: gray; font-family:descriptionFont">Timestamp: ${val}</p>`)
+        $form.append(`<a href="#"><button id="submit"> Submit</button></a>`)
+        $('.modal-contents').prepend($form)
+        $('.modal-contents').prepend(`<h1 id="header">Log In</h1>`)
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+          let url = "/help-us-improve"
+          if (document.getElementById("caller").value == "try") {
+            url = "/try-decartography"
+          }
+          e.preventDefault()
+          const data = Object.fromEntries(new FormData(e.target).entries());
+          let addr = data['addr']
+          let signature = data['signature']
+          let ts = data['ts']
+          console.log(`Signature Auth Address: ${addr}`)
+          window.offlineAuthAddr = addr;
+          console.log(`Signature Auth Signature: ${signature}`)
+          console.log(`Signature Auth Timestamp: ${ts}`)
+          const handle = async () => {
+            let opts = {
+              method: 'GET',
+              headers: {
+                'Content-Type': "application/json",
+              },
+              redirect: 'error',
+              credentials: 'include',
+            }
+            let authresp = await fetch(`/signature-auth?addr=${addr}&signature=${signature}&ts=${ts}`, opts)
+            let authres = await authresp.text()
+            let jsonres = JSON.parse(authres)
+
+            if (jsonres.hasOwnProperty('token')) {
+              console.log(`Signed token: ${jsonres['token']}`)
+              let optsAuth = {
+                method: 'GET',
+                headers: {
+                  'Content-Type': "application/json",
+                  'Authorization': `Bearer ${jsonres['token']}`
+                },
+                redirect: 'error'
+              }
+              console.log('Offline signature authorization...')
+              await fetch(url, optsAuth).then((res) => {
+                if (res.ok) {
+                  const changeBody = async () => {
+                    let content = await res.text()
+                    $('body').html(content)
+                  }
+
+                  changeBody()
+                }
+              })
+
+
+
+
+            } else {
+              window.location.href = window.location.origin + window.location.pathname;
+              alert('An error occured.')
+
+            }
+          }
+          handle()
+        });
+
+
+
+      });
+
+
+
+    }
+
+    const metamaskButton = document.getElementById('meta')
+
+
+
+    // function toggleButton() {
+    //   if (!window.ethereum) {
+    //     metamaskButton.onclick = function () { metamaskNotInstalled() };
+    //     function metamaskNotInstalled() {
+    //       document.getElementById("meta").innerHTML = "Metamask is not installed";
+    //       metamaskButton.style.backgroundColor = 'Red'
+    //       metamaskButton.style.color = 'white'
+    //       metamaskButton.style.borderColor = 'Red'
+    //       metamaskButton.style.animation = 'shake1 0.3s'
+    //     }
+
+    //     return false
+    //   } else {
+    //     metamaskButton.onclick = function () {
+    //       let account = null;
+    //       let accessToken = null;
+    //       let url = "/help-us-improve"
+    //       if (document.getElementById("caller").value == "try") {
+    //         url = "/try-decartography"
+    //       }
+    //       const connect = async () => {
+    //         await window.ethereum.request({ method: "eth_requestAccounts" })
+    //         window.w3 = new Web3(window.ethereum)
+    //         var accounts = await w3.eth.getAccounts()
+    //         account = accounts[0]
+    //         console.log(`Connected wallet: ${account}`)
+
+    //         accessToken = await auth()
+
+    //         let opts = {
+    //           method: 'GET',
+    //           headers: {
+    //             'Content-Type': "application/json",
+    //             'Authorization': `Bearer ${accessToken}`
+    //           }
+    //         }
+
+    //         let resp = await fetch(url, opts)
+    //         let res = await resp.text()
+    //         setTimeout(function () {
+    //           $('body').html(res)
+
+    //         }, 500);
+
+
+    //       }
+
+    //       const auth = async () => {
+    //         let res = await fetch(`/nonce?address=${account}`)
+    //         let resBody = await res.json()
+
+    //         let signature = await w3.eth.personal.sign(resBody.message, account)
+
+    //         let opts = {
+    //           method: 'POST',
+    //           headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${resBody.tempToken}`
+    //           }
+    //         }
+
+    //         res = await fetch(`/verify?signature=${signature}`, opts)
+    //         resBody = await res.json()
+
+    //         console.log(`Auth token: ${resBody.token}`)
+    //         return resBody.token
+    //       }
+
+    //       connect()
+    //     }
+    //   }
+    // }
+
+</script>
 
 </html>
